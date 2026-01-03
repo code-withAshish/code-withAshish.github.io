@@ -36,7 +36,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-white relative">
-      
+
       {/* Vertical Guide Lines (Subtle) */}
       <div className="hidden md:block fixed left-0 top-0 h-full w-[1px] bg-border/30 ml-[calc(50vw-36rem)] z-0" />
       <div className="hidden md:block fixed right-0 top-0 h-full w-[1px] bg-border/30 mr-[calc(50vw-36rem)] z-0" />
@@ -46,13 +46,13 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="container-width h-14 flex items-center justify-between relative z-10">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
             <Terminal size={16} className="text-accent" />
-            <span className="font-mono text-sm font-medium tracking-tight">ASHISH.DEV</span>
+            <span className="font-mono text-sm font-medium tracking-tight">Ashish Bhushan Kumar</span>
           </div>
-          
+
           <nav className="hidden md:flex items-center gap-8">
             {['Systems', 'Philosophy', 'Engineering'].map((item) => (
-              <a 
-                key={item} 
+              <a
+                key={item}
                 href={`#${item.toLowerCase()}`}
                 onClick={(e) => handleNavClick(e, item.toLowerCase())}
                 className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200"
@@ -70,7 +70,7 @@ export const Layout = ({ children }: LayoutProps) => {
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
                 <Linkedin size={18} />
               </a>
-              <button 
+              <button
                 onClick={copyEmail}
                 className="text-muted hover:text-text transition-colors relative flex items-center"
                 title="Copy email to clipboard"

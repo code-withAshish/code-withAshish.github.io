@@ -6,7 +6,7 @@ export const Hero = () => {
     <section className="container-width section-spacing min-h-[80vh] flex flex-col justify-center relative">
       {/* Hero-specific highlight to fade grid slightly */}
       <div className="absolute inset-0 bg-gradient-to-tr from-background via-transparent to-transparent pointer-events-none -z-10 opacity-60"></div>
-      
+
       <div className="space-y-8 relative z-10">
         <div className="space-y-2">
           <span className="mono-label text-accent">Identity</span>
@@ -16,14 +16,14 @@ export const Hero = () => {
         </div>
 
         <p className="text-lg text-muted font-normal leading-relaxed tracking-wide max-w-2xl">
-          Focusing on the intersection of distributed systems and scalable infrastructure. 
+          Focusing on the intersection of distributed systems and scalable infrastructure.
           Currently exploring advanced computing at <span className="text-accent">University</span>.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 border-t border-b border-border">
           <div className="space-y-1">
             <div className="mono-label">Location</div>
-            <div className="text-sm">San Francisco, CA</div>
+            <div className="text-sm">India</div>
           </div>
           <div className="space-y-1">
             <div className="mono-label">Focus</div>
