@@ -52,7 +52,7 @@ export const Projects = () => {
     <section id="systems" className="container-width section-spacing border-t border-border">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-3">
-          <span className="mono-label text-accent">02. Systems Registry</span>
+          <h2 className="mono-label text-accent">02. Systems Registry</h2>
         </div>
         <div className="md:col-span-9">
           <div className="flex flex-col">

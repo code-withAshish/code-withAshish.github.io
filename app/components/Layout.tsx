@@ -64,16 +64,17 @@ export const Layout = ({ children }: LayoutProps) => {
 
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
                 <Github size={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
                 <Linkedin size={18} />
               </a>
               <button 
                 onClick={copyEmail}
                 className="text-muted hover:text-text transition-colors relative flex items-center"
                 title="Copy email to clipboard"
+                aria-label="Copy Email Address"
               >
                 {copied ? <Check size={18} className="text-green-500" /> : <Mail size={18} />}
                 {copied && (
@@ -100,7 +101,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <span className="font-mono text-xs text-muted">SYSTEM STATUS: OPERATIONAL</span>
           </div>
           <div className="font-mono text-xs text-muted">
-            BUILD_ID: {new Date().toISOString().split('T')[0]} // v1.0.0
+            BUILD_ID: {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : 'DEV_MODE'} // v1.0.0
           </div>
         </div>
       </footer>

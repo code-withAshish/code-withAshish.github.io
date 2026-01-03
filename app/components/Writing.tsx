@@ -9,7 +9,7 @@ export const Writing = () => {
     <section id="engineering" className="container-width section-spacing border-t border-border">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-3">
-          <span className="mono-label text-accent">04. Engineering Log</span>
+          <h2 className="mono-label text-accent">04. Engineering Log</h2>
         </div>
         <div className="md:col-span-9">
           <div className="space-y-2">
