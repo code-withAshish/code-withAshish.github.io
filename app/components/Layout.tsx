@@ -1,4 +1,4 @@
-import { Terminal, Github, Linkedin, Mail, Check, Twitter } from 'lucide-react';
+import { Terminal, Github, Linkedin, Twitter, Mail, Check } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
@@ -36,7 +36,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-white relative">
-
+      
       {/* Vertical Guide Lines (Subtle) */}
       <div className="hidden md:block fixed left-0 top-0 h-full w-[1px] bg-border/30 ml-[calc(50vw-36rem)] z-0" />
       <div className="hidden md:block fixed right-0 top-0 h-full w-[1px] bg-border/30 mr-[calc(50vw-36rem)] z-0" />
@@ -111,9 +111,7 @@ export const Layout = ({ children }: LayoutProps) => {
             </nav>
           </div>
         </div>
-      </header>
-
-      {/* Main Content */}
+      </header>      {/* Main Content */}
       <main className="pt-20 pb-20 relative z-10">
         {children}
       </main>
@@ -122,7 +120,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <footer className="border-t border-border bg-background/50 backdrop-blur-sm relative z-10 mt-auto">
         <div className="container-width py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-muted uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">
-            
+
             {/* Identity & Version */}
             <div className="flex items-center gap-2">
               <span className="font-semibold text-text">ASHISH.DEV</span>

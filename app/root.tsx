@@ -32,7 +32,13 @@ export const meta: Route.MetaFunction = () => [
   { name: "twitter:image", content: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop" },
 ];
 
-export const links: Route.LinksFunction = () => [];
+import interRegular from "./fonts/Inter-Regular.woff2";
+import jetbrainsRegular from "./fonts/JetBrainsMono-Regular.woff2";
+
+export const links: Route.LinksFunction = () => [
+  { rel: "preload", href: interRegular, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+  { rel: "preload", href: jetbrainsRegular, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
