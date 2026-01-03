@@ -42,8 +42,8 @@ export const Hero = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <a href="#systems" className="flex items-center gap-2 bg-text text-background px-6 py-3 text-sm font-medium hover:bg-muted transition-colors">
-            View Systems <ArrowRight size={16} />
+          <a href="#uplink" className="flex items-center gap-2 bg-text text-background px-6 py-3 text-sm font-medium hover:bg-muted transition-colors">
+            Get in Touch <ArrowRight size={16} />
           </a>
           <a href="/resume.pdf" className="flex items-center gap-2 px-6 py-3 text-sm font-medium border border-border hover:border-accent hover:text-accent transition-colors">
             <Download size={16} /> Resume
