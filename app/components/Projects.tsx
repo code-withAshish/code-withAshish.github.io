@@ -81,7 +81,7 @@ export const Projects = () => {
                   </div>
                   
                   {/* Desc Column */}
-                  <div className="col-span-12 md:col-span-6 text-sm text-muted/80 line-clamp-1 md:line-clamp-none">
+                  <div className="col-span-12 md:col-span-6 text-sm md:text-base text-muted/80 line-clamp-1 md:line-clamp-none">
                     {project.shortDesc}
                   </div>
                   
