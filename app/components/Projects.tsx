@@ -56,8 +56,8 @@ export const Projects = () => {
         </div>
         <div className="md:col-span-9">
           <div className="flex flex-col">
-            {/* Header Row */}
-            <div className="hidden md:grid grid-cols-12 pb-4 border-b border-border text-xs font-mono text-muted uppercase tracking-wider">
+            {/* Table Header - Rigid Grid */}
+            <div className="hidden md:grid grid-cols-12 gap-6 pb-4 border-b border-border text-[10px] font-mono font-bold uppercase tracking-widest text-muted px-4">
               <div className="col-span-4">System Name</div>
               <div className="col-span-6">Description</div>
               <div className="col-span-2 text-right">Status</div>
@@ -66,66 +66,95 @@ export const Projects = () => {
             {/* Rows */}
             {projects.map((project) => (
               <div key={project.id} className="border-b border-border group relative">
-                <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                {/* Active Indicator Line */}
+                <div className={`absolute left-0 top-0 bottom-0 w-[2px] transition-opacity duration-200 ${expanded === project.id ? 'bg-accent opacity-100' : 'bg-accent opacity-0 group-hover:opacity-100'}`}></div>
+                
+                {/* Main Interaction Button */}
                 <button 
                   onClick={() => setExpanded(expanded === project.id ? null : project.id)}
-                  className="w-full text-left py-4 pl-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center hover:bg-surface/50 transition-all duration-200"
+                  className="w-full text-left py-5 px-4 grid grid-cols-1 md:grid-cols-12 gap-6 items-center hover:bg-surface/50 transition-all duration-200"
                 >
-                  <div className="col-span-4 font-medium text-text group-hover:text-accent transition-colors flex items-center gap-2">
-                    {expanded === project.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                    {project.name}
+                  {/* Name Column */}
+                  <div className={`col-span-12 md:col-span-4 font-medium transition-colors flex items-center gap-3 ${expanded === project.id ? 'text-accent' : 'text-text group-hover:text-accent'}`}>
+                    {expanded === project.id ? <ChevronUp size={14} className="shrink-0" /> : <ChevronDown size={14} className="shrink-0" />}
+                    <span className="truncate">{project.name}</span>
                   </div>
-                  <div className="col-span-6 text-sm text-muted line-clamp-1 md:line-clamp-none">
+                  
+                  {/* Desc Column */}
+                  <div className="col-span-12 md:col-span-6 text-sm text-muted/80 line-clamp-1 md:line-clamp-none">
                     {project.shortDesc}
                   </div>
-                  <div className="col-span-2 text-right hidden md:block">
-                    <span className="text-xs font-mono border border-border px-2 py-1 rounded">
+                  
+                  {/* Status Column */}
+                  <div className="hidden md:flex col-span-2 justify-end">
+                    <span className="text-[10px] font-mono font-bold border border-green-900/30 bg-green-900/10 text-green-500 px-2 py-1 rounded tracking-wider uppercase">
                       DEPLOYED
                     </span>
                   </div>
                 </button>
 
-                {/* Expanded Details */}
+                {/* Expanded Details Panel */}
                 {expanded === project.id && (
-                  <div className="pb-8 pt-2 pl-0 md:pl-4 grid grid-cols-1 md:grid-cols-12 gap-8 animate-in slide-in-from-top-2 duration-200">
-                    <div className="md:col-span-12 bg-surface/30 p-6 border border-border/50 rounded-sm">
-                      <div className="grid md:grid-cols-2 gap-8">
-                        <div className="space-y-4">
-                          <div>
-                            <span className="mono-label block mb-2">Problem</span>
-                            <p className="text-sm text-muted leading-relaxed">{project.problem}</p>
-                          </div>
-                          <div>
-                            <span className="mono-label block mb-2">Solution</span>
-                            <p className="text-sm text-muted leading-relaxed">{project.solution}</p>
+                  <div className="pb-10 pt-2 px-4 animate-in slide-in-from-top-2 duration-200">
+                    <div className="grid md:grid-cols-12 gap-8 lg:gap-12">
+                      
+                      {/* Left: Narrative (Aligned to Name col using md:col-start-1 or manual spacing?) 
+                          Actually, we want it to align with the *grid*. 
+                          The grid above is 4 | 6 | 2. 
+                          Here we use 8 | 4. 
+                          To align perfectly, we need to respect the padding. */}
+                      
+                      <div className="md:col-span-8 space-y-10 md:pl-7"> {/* Added padding to match chevron indentation */}
+                        
+                        {/* Problem Block */}
+                        <div className="space-y-3">
+                          <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 bg-red-500/50 rounded-full"></span>
+                            Problem Statement
+                          </h4>
+                          <p className="text-sm text-text/90 leading-relaxed">
+                            {project.problem}
+                          </p>
+                        </div>
+
+                        {/* Solution Block */}
+                        <div className="space-y-3">
+                          <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-accent flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 bg-accent/50 rounded-full"></span>
+                            Engineered Solution
+                          </h4>
+                          <p className="text-sm text-text/90 leading-relaxed">
+                            {project.solution}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Right: Metadata (Divider starts here) */}
+                      <div className="md:col-span-4 space-y-8 md:border-l md:border-border/50 md:pl-8 lg:pl-10">
+                        <div>
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted block mb-4">Architecture Stack</span>
+                          <div className="flex flex-wrap gap-2">
+                            {project.stack.map(tech => (
+                              <span key={tech} className="text-[10px] font-mono border border-border px-2 py-1 rounded text-muted bg-surface/30 hover:border-accent/30 transition-colors cursor-default">
+                                {tech}
+                              </span>
+                            ))}
                           </div>
                         </div>
                         
-                        <div className="space-y-6">
-                          <div>
-                            <span className="mono-label block mb-2">Tech Stack</span>
-                            <div className="flex flex-wrap gap-2">
-                              {project.stack.map(tech => (
-                                <span key={tech} className="text-xs border border-border px-2 py-1 text-muted">
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <span className="mono-label block mb-2">Resources</span>
-                            <div className="flex gap-4">
-                              {project.links.map(link => (
-                                <a 
-                                  key={link.label} 
-                                  href={link.url}
-                                  className="text-sm flex items-center gap-1 hover:text-accent transition-colors"
-                                >
-                                  {link.label} <ExternalLink size={12} />
-                                </a>
-                              ))}
-                            </div>
+                        <div>
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted block mb-4">Deployment Links</span>
+                          <div className="flex flex-col gap-3">
+                            {project.links.map(link => (
+                              <a 
+                                key={link.label} 
+                                href={link.url}
+                                className="text-xs flex items-center gap-2 text-text/80 hover:text-accent transition-colors group/link font-mono uppercase tracking-wider"
+                              >
+                                <ExternalLink size={12} className="text-muted group-hover/link:text-accent transition-colors" />
+                                {link.label} 
+                              </a>
+                            ))}
                           </div>
                         </div>
                       </div>
@@ -140,3 +169,4 @@ export const Projects = () => {
     </section>
   );
 };
+
