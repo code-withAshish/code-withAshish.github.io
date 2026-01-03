@@ -3,6 +3,7 @@ import { About } from "../components/About";
 import { Projects } from "../components/Projects";
 import { Skills } from "../components/Skills";
 import { Writing } from "../components/Writing";
+import { Contact } from "../components/Contact";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -20,6 +21,7 @@ export default function Home() {
       <Skills />
       <About />
       <Writing />
+      <Contact />
     </>
   );
 }
