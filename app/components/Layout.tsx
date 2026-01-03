@@ -45,27 +45,29 @@ export const Layout = ({ children }: LayoutProps) => {
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-200">
         <div className="container-width">
           {/* Primary Row */}
-          <div className="h-14 flex items-center justify-between relative z-10">
-            <div className="flex items-center gap-2 cursor-pointer shrink-0" onClick={() => navigate('/')}>
-              <Terminal size={16} className="text-accent" />
-              <span className="font-mono text-sm font-medium tracking-tight">Ashish Bhushan Kumar</span>
+          <div className="h-14 grid grid-cols-12 items-center relative z-10">
+            {/* Logo Area */}
+            <div className="col-span-6 md:col-span-3 flex justify-start items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+              <Terminal size={16} className="text-accent shrink-0" />
+              <span className="font-mono text-sm font-medium tracking-tight truncate">Ashish Bhushan Kumar</span>
             </div>
             
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {/* Desktop Nav - Centered */}
+            <nav className="hidden md:flex col-span-6 justify-center items-center gap-8">
               {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200"
+                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
                 >
                   {item}
                 </a>
               ))}
             </nav>
 
-            <div className="flex items-center gap-6 shrink-0">
+            {/* Socials - Right Aligned */}
+            <div className="col-span-6 md:col-span-3 flex justify-end items-center gap-6">
               <div className="flex items-center gap-4">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
                   <Github size={18} />
@@ -84,7 +86,7 @@ export const Layout = ({ children }: LayoutProps) => {
                 >
                   {copied ? <Check size={18} className="text-green-500" /> : <Mail size={18} />}
                   {copied && (
-                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-surface border border-border px-2 py-1 rounded text-[10px] font-mono whitespace-nowrap text-text">
+                    <span className="absolute -bottom-8 right-0 bg-surface border border-border px-2 py-1 rounded text-[10px] font-mono whitespace-nowrap text-text">
                       COPIED
                     </span>
                   )}
