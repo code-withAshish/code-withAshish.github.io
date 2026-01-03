@@ -9,7 +9,7 @@ export const Hero = () => {
 
       <div className="space-y-8 relative z-10">
         <div className="space-y-2">
-          <span className="mono-label text-accent">Identity</span>
+          <span className="mono-label text-accent">00. Identity</span>
           <h1 className="text-4xl md:text-6xl font-bold text-text max-w-2xl leading-tight">
             I design and build reliable software systems<span className="cursor-blink"></span>
           </h1>

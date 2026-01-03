@@ -23,7 +23,7 @@ export const Writing = () => {
                   <span className="font-mono text-xs text-muted w-24 shrink-0">{log.date}</span>
                   <span className="text-text font-medium group-hover:text-accent transition-colors flex-1 flex items-center gap-2">
                     {log.title}
-                    <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowUpRight size={14} className="opacity-30 group-hover:opacity-100 transition-opacity text-accent" />
                   </span>
                   <span className="text-xs text-muted border border-border px-2 py-1 rounded hidden md:inline-block">
                     {log.category}

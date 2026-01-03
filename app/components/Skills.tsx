@@ -1,5 +1,3 @@
-
-
 const skills = {
   "Core": ["System Design", "Distributed Systems", "Data Structures", "Concurrency"],
   "Languages": ["Go", "Rust", "TypeScript", "Python", "SQL"],
@@ -15,15 +13,19 @@ export const Skills = () => {
           <h2 className="mono-label text-accent">03. Toolbelt</h2>
         </div>
         <div className="md:col-span-9">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="space-y-4">
-                <h3 className="font-mono text-sm uppercase text-muted tracking-wider border-b border-border pb-2">
+              <div 
+                key={category} 
+                className="group p-6 bg-surface/10 border border-border rounded-sm hover:border-accent/30 transition-colors"
+              >
+                <h3 className="font-mono text-xs uppercase text-muted tracking-wider mb-4 group-hover:text-accent transition-colors">
                   {category}
                 </h3>
                 <ul className="space-y-2">
                   {items.map(item => (
-                    <li key={item} className="text-sm text-text hover:text-accent transition-colors cursor-default">
+                    <li key={item} className="text-sm text-text/80 hover:text-text transition-colors cursor-default flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-border group-hover:bg-accent/50 transition-colors"></span>
                       {item}
                     </li>
                   ))}
