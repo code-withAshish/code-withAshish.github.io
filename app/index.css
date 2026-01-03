@@ -7,6 +7,7 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 5rem;
   }
   body {
     @apply bg-background text-text font-sans antialiased selection:bg-accent selection:text-white;
@@ -46,4 +47,15 @@
   vertical-align: text-bottom;
   animation: blink 1s step-end infinite;
   margin-left: 4px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

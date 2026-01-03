@@ -1,4 +1,4 @@
-import { Terminal, Github, Linkedin, Mail, Check } from 'lucide-react';
+import { Terminal, Github, Linkedin, Mail, Check, Twitter } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
@@ -42,48 +42,71 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className="hidden md:block fixed right-0 top-0 h-full w-[1px] bg-border/30 mr-[calc(50vw-36rem)] z-0" />
 
       {/* Top Status Bar */}
-      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container-width h-14 flex items-center justify-between relative z-10">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-            <Terminal size={16} className="text-accent" />
-            <span className="font-mono text-sm font-medium tracking-tight">Ashish Bhushan Kumar</span>
+      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-200">
+        <div className="container-width">
+          {/* Primary Row */}
+          <div className="h-14 flex items-center justify-between relative z-10">
+            <div className="flex items-center gap-2 cursor-pointer shrink-0" onClick={() => navigate('/')}>
+              <Terminal size={16} className="text-accent" />
+              <span className="font-mono text-sm font-medium tracking-tight">Ashish Bhushan Kumar</span>
+            </div>
+            
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+              {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(e) => handleNavClick(e, item.toLowerCase())}
+                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-6 shrink-0">
+              <div className="flex items-center gap-4">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
+                  <Github size={18} />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
+                  <Linkedin size={18} />
+                </a>
+                <a href="https://x.com/codewithashish" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="Twitter Profile">
+                  <Twitter size={18} />
+                </a>
+                <button 
+                  onClick={copyEmail}
+                  className="text-muted hover:text-text transition-colors relative flex items-center"
+                  title="Copy email to clipboard"
+                  aria-label="Copy Email Address"
+                >
+                  {copied ? <Check size={18} className="text-green-500" /> : <Mail size={18} />}
+                  {copied && (
+                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-surface border border-border px-2 py-1 rounded text-[10px] font-mono whitespace-nowrap text-text">
+                      COPIED
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {['Systems', 'Philosophy', 'Engineering'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
-                <Github size={18} />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
-                <Linkedin size={18} />
-              </a>
-              <button
-                onClick={copyEmail}
-                className="text-muted hover:text-text transition-colors relative flex items-center"
-                title="Copy email to clipboard"
-                aria-label="Copy Email Address"
-              >
-                {copied ? <Check size={18} className="text-green-500" /> : <Mail size={18} />}
-                {copied && (
-                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-surface border border-border px-2 py-1 rounded text-[10px] font-mono whitespace-nowrap text-text">
-                    COPIED
-                  </span>
-                )}
-              </button>
-            </div>
+          {/* Mobile Nav Row */}
+          <div className="md:hidden pb-3 -mt-1 overflow-x-auto no-scrollbar mask-gradient-right">
+            <nav className="flex items-center gap-6 px-1">
+              {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(e) => handleNavClick(e, item.toLowerCase())}
+                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
       </header>
@@ -94,14 +117,22 @@ export const Layout = ({ children }: LayoutProps) => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 bg-background/50 backdrop-blur-sm relative z-10">
-        <div className="container-width flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span className="font-mono text-xs text-muted">SYSTEM STATUS: OPERATIONAL</span>
-          </div>
-          <div className="font-mono text-xs text-muted">
-            BUILD_ID: {typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : 'DEV_MODE'} // v1.0.0
+      <footer className="border-t border-border bg-background/50 backdrop-blur-sm relative z-10 mt-auto">
+        <div className="container-width py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-muted uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">
+            
+            {/* Identity & Version */}
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-text">ASHISH.DEV</span>
+              <span>[v.{typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__.replace(/-/g, '.') : 'DEV'}]</span>
+            </div>
+
+            {/* Status Indicator */}
+            <div className="flex items-center gap-2">
+              <span>SYSTEM: ONLINE</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+            </div>
+
           </div>
         </div>
       </footer>
