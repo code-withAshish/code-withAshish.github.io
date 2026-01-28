@@ -14,7 +14,7 @@ export const meta: Route.MetaFunction = () => [
   { title: "Ashish | Systems Engineer" },
   { name: "description", content: "Personal portfolio and engineering logs focusing on distributed systems and scalable infrastructure." },
   { name: "viewport", content: "width=device-width, initial-scale=1" },
-  
+
   // Open Graph / Facebook
   { property: "og:type", content: "website" },
   { property: "og:url", content: "https://code-withashish.github.io/" },
@@ -48,6 +48,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSESQS9LER"></script>
+        {/* eslint-disable-next-line react/no-danger, @typescript-eslint/no-undef */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-CSESQS9LER');`
+          }}
+        ></script>
       </head>
       <body>
         {children}
@@ -61,7 +71,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <SiteLayout>
-        <Outlet />
+      <Outlet />
     </SiteLayout>
   );
 }
@@ -89,7 +99,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       <div className="max-w-2xl w-full space-y-8 border border-red-900/50 p-8 rounded-sm bg-surface/20 relative overflow-hidden">
         {/* Decorative scanline */}
         <div className="absolute top-0 left-0 w-full h-1 bg-red-600/50 animate-pulse"></div>
-        
+
         <div className="flex items-center justify-between border-b border-red-900/30 pb-4">
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 rounded-full bg-red-600 animate-pulse"></div>
@@ -114,7 +124,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         )}
 
         <div className="pt-8 flex gap-4">
-          <a 
+          <a
             href="/"
             className="px-6 py-3 bg-red-900/20 border border-red-700/50 text-red-400 hover:bg-red-900/40 hover:text-red-200 transition-all uppercase tracking-widest text-xs font-medium"
           >
