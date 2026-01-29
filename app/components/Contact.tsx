@@ -5,8 +5,8 @@ const channels = [
   {
     id: 'email',
     title: 'Direct Line',
-    value: 'hello@example.com',
-    action: 'mailto:hello@example.com',
+    value: 'abhushan064@gmail.com',
+    action: 'mailto:abhushan064@gmail.com',
     icon: Mail,
     status: 'SMTP',
     copy: true
@@ -14,8 +14,8 @@ const channels = [
   {
     id: 'github',
     title: 'Repositories',
-    value: 'codewithashish',
-    action: 'https://github.com/codewithashish',
+    value: 'code-withAshish',
+    action: 'https://github.com/code-withAshish/',
     icon: Github,
     status: 'GIT',
     copy: false
@@ -23,8 +23,8 @@ const channels = [
   {
     id: 'linkedin',
     title: 'Professional',
-    value: 'in/ashish',
-    action: 'https://linkedin.com/in/ashish',
+    value: 'in/code-withashish',
+    action: 'https://www.linkedin.com/in/code-withashish/',
     icon: Linkedin,
     status: 'NETWORK',
     copy: false
@@ -54,11 +54,11 @@ export const Contact = () => {
   return (
     <section id="uplink" className="container-width section-spacing border-t border-border">
       <div className="flex flex-col gap-10">
-        
+
         {/* Compact Header */}
         <div className="flex items-center justify-between">
           <h2 className="mono-label text-accent">05. Uplink</h2>
-          
+
           <div className="flex items-center gap-3 px-3 py-1.5 border border-border/50 rounded-full bg-surface/20">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

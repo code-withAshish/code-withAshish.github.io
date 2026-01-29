@@ -8,16 +8,16 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const [copied, setCopied] = useState(false);
-  const email = "hello@example.com";
+  // const [copied, setCopied] = useState(false);
+  // const email = "abhushan064@gmail.com";
   const location = useLocation();
   const navigate = useNavigate();
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  // const copyEmail = () => {
+  //   navigator.clipboard.writeText(email);
+  //   setCopied(true);
+  //   setTimeout(() => setCopied(false), 2000);
+  // };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-white relative">
-      
+
       {/* Vertical Guide Lines (Subtle) */}
       <div className="hidden md:block fixed left-0 top-0 h-full w-[1px] bg-border/30 ml-[calc(50vw-36rem)] z-0" />
       <div className="hidden md:block fixed right-0 top-0 h-full w-[1px] bg-border/30 mr-[calc(50vw-36rem)] z-0" />
@@ -51,12 +51,12 @@ export const Layout = ({ children }: LayoutProps) => {
               <Terminal size={16} className="text-accent shrink-0" />
               <span className="font-mono text-sm font-medium tracking-tight truncate">Ashish Bhushan Kumar</span>
             </div>
-            
+
             {/* Desktop Nav - Centered */}
             <nav className="hidden md:flex col-span-6 justify-center items-center gap-8">
               {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
-                <a 
-                  key={item} 
+                <a
+                  key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => handleNavClick(e, item.toLowerCase())}
                   className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
@@ -69,16 +69,16 @@ export const Layout = ({ children }: LayoutProps) => {
             {/* Socials - Right Aligned */}
             <div className="col-span-6 md:col-span-3 flex justify-end items-center gap-6">
               <div className="flex items-center gap-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
+                <a href="https://github.com/code-withAshish/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub Profile">
                   <Github size={18} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/code-withashish/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn Profile">
                   <Linkedin size={18} />
                 </a>
                 <a href="https://x.com/codewithashish" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="Twitter Profile">
                   <Twitter size={18} />
                 </a>
-                <button 
+                {/* <button
                   onClick={copyEmail}
                   className="text-muted hover:text-text transition-colors relative flex items-center"
                   title="Copy email to clipboard"
@@ -90,7 +90,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       COPIED
                     </span>
                   )}
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -99,8 +99,8 @@ export const Layout = ({ children }: LayoutProps) => {
           <div className="md:hidden pb-3 -mt-1 overflow-x-auto no-scrollbar mask-gradient-right">
             <nav className="flex items-center gap-6 px-1">
               {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
-                <a 
-                  key={item} 
+                <a
+                  key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => handleNavClick(e, item.toLowerCase())}
                   className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
