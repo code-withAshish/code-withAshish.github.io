@@ -1,29 +1,19 @@
-import { Terminal, Github, Linkedin, Twitter, Mail, Check } from 'lucide-react';
+import { Terminal, Github, Linkedin, Twitter } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, Link } from 'react-router';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  // const [copied, setCopied] = useState(false);
-  // const email = "abhushan064@gmail.com";
   const location = useLocation();
   const navigate = useNavigate();
-
-  // const copyEmail = () => {
-  //   navigator.clipboard.writeText(email);
-  //   setCopied(true);
-  //   setTimeout(() => setCopied(false), 2000);
-  // };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     e.preventDefault();
     if (location.pathname !== '/') {
       navigate('/');
-      // Wait for navigation to complete before scrolling
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -33,6 +23,13 @@ export const Layout = ({ children }: LayoutProps) => {
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const isActive = (path: string) => location.pathname.startsWith(path);
+
+  const navLinkClass = (path: string) =>
+    `text-xs font-mono uppercase tracking-widest transition-colors duration-200 whitespace-nowrap ${
+      isActive(path) ? 'text-accent' : 'text-muted hover:text-accent'
+    }`;
 
   return (
     <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-white relative">
@@ -54,16 +51,22 @@ export const Layout = ({ children }: LayoutProps) => {
 
             {/* Desktop Nav - Centered */}
             <nav className="hidden md:flex col-span-6 justify-center items-center gap-8">
-              {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
-                >
-                  {item}
-                </a>
-              ))}
+              <Link to="/blog" className={navLinkClass('/blog')}>
+                Engineering Log
+              </Link>
+              <Link to="/projects" className={navLinkClass('/projects')}>
+                Projects
+              </Link>
+              <Link to="/uses" className={navLinkClass('/uses')}>
+                Uses
+              </Link>
+              <a
+                href="#uplink"
+                onClick={(e) => handleNavClick(e, 'uplink')}
+                className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
+              >
+                Contact
+              </a>
             </nav>
 
             {/* Socials - Right Aligned */}
@@ -78,19 +81,6 @@ export const Layout = ({ children }: LayoutProps) => {
                 <a href="https://x.com/codewithashish" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="Twitter Profile">
                   <Twitter size={18} />
                 </a>
-                {/* <button
-                  onClick={copyEmail}
-                  className="text-muted hover:text-text transition-colors relative flex items-center"
-                  title="Copy email to clipboard"
-                  aria-label="Copy Email Address"
-                >
-                  {copied ? <Check size={18} className="text-green-500" /> : <Mail size={18} />}
-                  {copied && (
-                    <span className="absolute -bottom-8 right-0 bg-surface border border-border px-2 py-1 rounded text-[10px] font-mono whitespace-nowrap text-text">
-                      COPIED
-                    </span>
-                  )}
-                </button> */}
               </div>
             </div>
           </div>
@@ -98,44 +88,85 @@ export const Layout = ({ children }: LayoutProps) => {
           {/* Mobile Nav Row */}
           <div className="md:hidden pb-3 -mt-1 overflow-x-auto no-scrollbar mask-gradient-right">
             <nav className="flex items-center gap-6 px-1">
-              {['Systems', 'Philosophy', 'Engineering', 'Uplink'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                  className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
-                >
-                  {item}
-                </a>
-              ))}
+              <Link to="/blog" className={navLinkClass('/blog')}>Engineering Log</Link>
+              <Link to="/projects" className={navLinkClass('/projects')}>Projects</Link>
+              <Link to="/uses" className={navLinkClass('/uses')}>Uses</Link>
+              <a
+                href="#uplink"
+                onClick={(e) => handleNavClick(e, 'uplink')}
+                className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap"
+              >
+                Contact
+              </a>
             </nav>
           </div>
         </div>
-      </header>      {/* Main Content */}
+      </header>
+
+      {/* Main Content */}
       <main className="pt-20 pb-20 relative z-10">
         {children}
       </main>
 
       {/* Footer */}
       <footer className="border-t border-border bg-background/50 backdrop-blur-sm relative z-10 mt-auto">
-        <div className="container-width py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-muted uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">
+        <div className="container-width py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
-            {/* Identity & Version */}
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-text">ASHISH.DEV</span>
-              <span>[v.{typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__.replace(/-/g, '.') : 'DEV'}]</span>
+            {/* Identity */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Terminal size={14} className="text-accent" />
+                <span className="font-mono text-sm font-semibold text-text">Ashish Bhushan Kumar</span>
+              </div>
+              <p className="text-xs text-muted leading-relaxed">
+                Systems engineer focused on distributed systems and scalable infrastructure.
+              </p>
+              <div className="flex items-center gap-4 pt-1">
+                <a href="https://github.com/code-withAshish/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="GitHub">
+                  <Github size={16} />
+                </a>
+                <a href="https://www.linkedin.com/in/code-withashish/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="LinkedIn">
+                  <Linkedin size={16} />
+                </a>
+                <a href="https://x.com/codewithashish" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-text transition-colors" aria-label="Twitter">
+                  <Twitter size={16} />
+                </a>
+              </div>
             </div>
 
-            {/* Status Indicator */}
+            {/* Navigation */}
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Navigation</span>
+              <div className="flex flex-col gap-2">
+                <Link to="/" className="text-xs text-muted hover:text-accent transition-colors font-mono">Home</Link>
+                <Link to="/blog" className="text-xs text-muted hover:text-accent transition-colors font-mono">Engineering Log</Link>
+                <Link to="/projects" className="text-xs text-muted hover:text-accent transition-colors font-mono">Projects</Link>
+                <Link to="/uses" className="text-xs text-muted hover:text-accent transition-colors font-mono">Uses</Link>
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Contact</span>
+              <div className="flex flex-col gap-2">
+                <a href="mailto:abhushan064@gmail.com" className="text-xs text-muted hover:text-accent transition-colors font-mono">abhushan064@gmail.com</a>
+                <a href="https://github.com/code-withAshish/" target="_blank" rel="noopener noreferrer" className="text-xs text-muted hover:text-accent transition-colors font-mono">github.com/code-withAshish</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-3 text-[10px] font-mono text-muted/50 uppercase tracking-widest">
+            <span>ASHISH.DEV [v.{typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__.replace(/-/g, '.') : 'DEV'}]</span>
             <div className="flex items-center gap-2">
               <span>SYSTEM: ONLINE</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             </div>
-
           </div>
         </div>
       </footer>
     </div>
   );
 };
+

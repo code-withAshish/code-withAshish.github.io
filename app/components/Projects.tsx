@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { ChevronDown, ChevronUp, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router';
 
 interface Project {
   id: string;
@@ -164,6 +165,22 @@ export const Projects = () => {
               </div>
             ))}
           </div>
+
+          {/* Prominent "View All" CTA */}
+          <Link
+            to="/projects"
+            className="group mt-6 flex items-center justify-between w-full border border-border hover:border-accent/60 bg-surface/5 hover:bg-surface/20 px-6 py-5 rounded-sm transition-all duration-200"
+          >
+            <div className="flex flex-col gap-1">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Systems Registry</span>
+              <span className="text-base font-medium text-text group-hover:text-accent transition-colors">
+                Browse all projects →
+              </span>
+            </div>
+            <div className="flex items-center justify-center w-10 h-10 border border-border group-hover:border-accent/50 rounded-sm transition-all">
+              <ArrowUpRight size={18} className="text-muted group-hover:text-accent transition-colors" />
+            </div>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import RehypeHighlight from 'rehype-highlight';
 import RemarkGfm from 'remark-gfm';
@@ -12,10 +12,23 @@ import 'highlight.js/styles/atom-one-dark.css';
 export const LogViewer = () => {
   const { slug } = useParams();
   const post = slug ? getLogBySlug(slug) : null;
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = document.documentElement;
+      const scrolled = el.scrollTop;
+      const total = el.scrollHeight - el.clientHeight;
+      setProgress(total > 0 ? (scrolled / total) * 100 : 0);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   if (!post) {
     return <Navigate to="/" replace />;
@@ -23,10 +36,16 @@ export const LogViewer = () => {
 
   return (
     <article className="container-width section-spacing pt-32 min-h-screen">
+      {/* Reading Progress Bar */}
+      <div
+        className="fixed top-0 left-0 h-[2px] bg-accent z-[100] transition-all duration-75"
+        style={{ width: `${progress}%` }}
+      />
+
       {/* Back Navigation */}
-      <Link to="/" className="inline-flex items-center gap-2 text-xs text-muted hover:text-accent transition-colors mb-12 group uppercase tracking-widest">
+      <Link to="/blog" className="inline-flex items-center gap-2 text-xs text-muted hover:text-accent transition-colors mb-12 group uppercase tracking-widest">
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-        RETURN_TO_ROOT
+        Back to Engineering Log
       </Link>
 
       {/* Header */}

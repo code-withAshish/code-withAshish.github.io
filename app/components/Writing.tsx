@@ -1,9 +1,13 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, BookOpen } from 'lucide-react';
 import { Link } from 'react-router';
 import { getLogList } from '../lib/logRegistry';
 
+const estimateReadTime = (content: string) =>
+  Math.max(1, Math.ceil(content.trim().split(/\s+/).length / 200));
+
+
 export const Writing = () => {
-  const logs = getLogList();
+  const logs = getLogList().slice(0, 3);
 
   return (
     <section id="engineering" className="container-width section-spacing border-t border-border">
@@ -25,13 +29,32 @@ export const Writing = () => {
                     {log.title}
                     <ArrowUpRight size={16} className="opacity-30 group-hover:opacity-100 transition-opacity text-accent" />
                   </span>
-                  <span className="text-xs text-muted border border-border px-2 py-1 rounded hidden md:inline-block">
-                    {log.category}
-                  </span>
+                  <div className="hidden md:flex items-center gap-2 shrink-0">
+                    <span className="text-xs text-muted border border-border px-2 py-1 rounded">{log.category}</span>
+                    <span className="flex items-center gap-1 text-[10px] text-muted/60 font-mono">
+                      <BookOpen size={10} />{estimateReadTime(log.content)}m
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
+
+          {/* Prominent "View All" CTA */}
+          <Link
+            to="/blog"
+            className="group mt-6 flex items-center justify-between w-full border border-border hover:border-accent/60 bg-surface/5 hover:bg-surface/20 px-6 py-5 rounded-sm transition-all duration-200"
+          >
+            <div className="flex flex-col gap-1">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Engineering Log</span>
+              <span className="text-base font-medium text-text group-hover:text-accent transition-colors">
+                Browse all posts →
+              </span>
+            </div>
+            <div className="flex items-center justify-center w-10 h-10 border border-border group-hover:border-accent/50 rounded-sm transition-all">
+              <ArrowUpRight size={18} className="text-muted group-hover:text-accent transition-colors" />
+            </div>
+          </Link>
         </div>
       </div>
     </section>

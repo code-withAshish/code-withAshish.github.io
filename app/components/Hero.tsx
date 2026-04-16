@@ -17,7 +17,7 @@ export const Hero = () => {
 
         <p className="text-lg text-muted font-normal leading-relaxed tracking-wide max-w-2xl">
           Focusing on the intersection of distributed systems and scalable infrastructure.
-          Currently exploring advanced computing at <span className="text-accent">University</span>.
+          Currently pursuing Masters in Computer Application — building in the background while studying.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 border-t border-b border-border">
